@@ -1,0 +1,38 @@
+{
+  "name": "@enhanced-dom/icon",
+  "version": "0.0.2",
+  "description": "Pluggable icon webcomponent",
+  "keywords": [],
+  "repository": "https://github.com/enhanced-dom/icon.git",
+  "license": "MIT",
+  "author": "CD9B4A105290E17E0948E021DF4105107C88693C59C0B891CCC08366C51AEA990902A6A156AC87D88A2FC41422A5E1C3C4071F251F19441C4516000EC25F87DF",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "rimraf dist/*",
+    "build": "tsc -p ./tsconfig.json",
+    "postbuild": "copyfiles package.json LICENSE.md README.md dist",
+    "package": "cd dist && npm pack",
+    "lint": "eslint src/** --fix --config eslint.config.js"
+  },
+  "dependencies": {
+    "@enhanced-dom/webcomponent": "^0.0.2",
+    "@fortawesome/fontawesome-common-types": "^0.2.35",
+    "classnames": "^2.3.1",
+    "lodash.debounce": "^4.0.8",
+    "lodash.omit": "^4.0.1",
+    "lodash.uniqueid": "^4.0.1"
+  },
+  "devDependencies": {
+    "@enhanced-dom/lint": "^0.0.3",
+    "@types/lodash.debounce": "^4.0.6",
+    "@types/lodash.omit": "^4.5.6",
+    "@types/lodash.uniqueid": "^4.0.6",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.2.2"
+  },
+  "engines": {
+    "node": ">=14.17.0",
+    "npm": ">=8.0.0"
+}
+}
