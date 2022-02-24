@@ -59,11 +59,18 @@ export class IconWebComponent extends HTMLElement {
     return ['config', 'title', 'class', 'style']
   }
 
+  static tag = 'enhanced-dom-icon'
+  static register = () => {
+    if (!window.customElements.get(IconWebComponent.tag)) {
+      window.customElements.define(IconWebComponent.tag, IconWebComponent)
+    }
+  }
+
   static readonly renderer = new MultiIconRenderer()
   static addIconInterpreter = (key: string, interpreter: IIconInterpreter) => {
     MultiIconRenderer.addInterpreter(key, interpreter)
   }
-  private _attributes: Record<string, any> = { role: 'img', titleId: uniqueId(`enhanced-dom-icon-`), 'aria-hidden': false }
+  private _attributes: Record<string, any> = { role: 'img', titleId: uniqueId(`${IconWebComponent.tag}-`), 'aria-hidden': false }
 
   constructor() {
     super()
@@ -107,5 +114,3 @@ export class IconWebComponent extends HTMLElement {
     }
   }
 }
-
-// IconWebComponent.renderer.addStyle('default', styles._source)
