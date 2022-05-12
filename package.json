@@ -1,6 +1,6 @@
 {
   "name": "@enhanced-dom/icon",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Pluggable icon webcomponent",
   "keywords": [],
   "repository": "https://github.com/enhanced-dom/icon.git",
@@ -10,9 +10,10 @@
   "scripts": {
     "prebuild": "rimraf dist/*",
     "build": "tsc -p ./tsconfig.json",
-    "postbuild": "copyfiles package.json LICENSE.md README.md dist",
+    "postbuild": "copyfiles LICENSE.md README.md dist && @enhanced-dom-copy-packagejson",
     "package": "cd dist && npm pack",
-    "lint": "eslint src/** --fix --config eslint.config.js"
+    "postinstall": "@enhanced-dom-husky",
+    "lint": "eslint --fix --config eslint.config.js --ext ts,tsx src"
   },
   "dependencies": {
     "@enhanced-dom/webcomponent": "^0.0.2",
@@ -23,7 +24,8 @@
     "lodash.uniqueid": "^4.0.1"
   },
   "devDependencies": {
-    "@enhanced-dom/lint": "^0.0.3",
+    "@enhanced-dom/lint": "^0.0.6",
+    "@enhanced-dom/webpack": "^0.0.6",
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.omit": "^4.5.6",
     "@types/lodash.uniqueid": "^4.0.6",

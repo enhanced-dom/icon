@@ -70,6 +70,7 @@ export class IconWebComponent extends HTMLElement {
   static addIconInterpreter = (key: string, interpreter: IIconInterpreter) => {
     MultiIconRenderer.addInterpreter(key, interpreter)
   }
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   private _attributes: Record<string, any> = { role: 'img', titleId: uniqueId(`${IconWebComponent.tag}-`), 'aria-hidden': false }
 
   constructor() {
