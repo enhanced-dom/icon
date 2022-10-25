@@ -13,28 +13,31 @@
     "postbuild": "copyfiles LICENSE.md README.md dist && @enhanced-dom-copy-packagejson",
     "package": "cd dist && npm pack",
     "postinstall": "@enhanced-dom-husky",
-    "lint": "eslint --fix --config eslint.config.js --ext ts,tsx src"
+    "css": "webpack --config typed-styles.config.js",
+    "lint": "eslint --fix --config eslint.config.js --ext ts,tsx src",
+    "demo": "webpack serve --config ./demo/webpack.config.js",
+    "docs": "webpack build --config ./demo/webpack.config.js --mode=production"
   },
   "dependencies": {
     "@enhanced-dom/webcomponent": "^0.0.2",
-    "@fortawesome/fontawesome-common-types": "^0.2.35",
     "classnames": "^2.3.1",
     "lodash.debounce": "^4.0.8",
-    "lodash.omit": "^4.0.1",
-    "lodash.uniqueid": "^4.0.1"
+    "lodash.omit": "^4.0.1"
   },
   "devDependencies": {
-    "@enhanced-dom/lint": "^0.0.6",
-    "@enhanced-dom/webpack": "^0.0.6",
+    "@enhanced-dom/babel": "^0.0.5",
+    "@enhanced-dom/fontawesome": "^0.0.4",
+    "@enhanced-dom/lint": "^0.0.7",
+    "@enhanced-dom/react": "^0.0.12",
+    "@enhanced-dom/webpack": "^0.0.8",
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.omit": "^4.5.6",
-    "@types/lodash.uniqueid": "^4.0.6",
-    "copyfiles": "^2.4.1",
-    "rimraf": "^3.0.2",
+    "@types/react": "^17.0.8",
+    "@types/react-dom": "^17.0.5",
     "typescript": "^4.2.2"
   },
   "engines": {
     "node": ">=14.17.0",
     "npm": ">=8.0.0"
-}
+  }
 }

@@ -1,7 +1,5 @@
-import { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import debounce from 'lodash.debounce'
 import { HtmlRenderer, IAbstractElement } from '@enhanced-dom/webcomponent'
-import uniqueId from 'lodash.uniqueid'
 import omit from 'lodash.omit'
 
 export interface IIconInterpreter<
@@ -41,7 +39,7 @@ export class MultiIconRenderer {
       throw `no icon renderer found for namespace: ${config.namespace}`
     }
 
-    const renderer = new HtmlRenderer(interpreter.getIcon)
+    const renderer = new HtmlRenderer('@enhanced-dom/MultiIconRenderer', interpreter.getIcon)
     renderer.render(node, { config: omit(config, 'namespace'), ...rest })
   }
 
@@ -66,17 +64,16 @@ export class IconWebComponent extends HTMLElement {
     }
   }
 
-  static readonly renderer = new MultiIconRenderer()
+  static renderer = new MultiIconRenderer()
   static addIconInterpreter = (key: string, interpreter: IIconInterpreter) => {
     MultiIconRenderer.addInterpreter(key, interpreter)
   }
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  private _attributes: Record<string, any> = { role: 'img', titleId: uniqueId(`${IconWebComponent.tag}-`), 'aria-hidden': false }
+  private _attributes: Record<string, any> = { role: 'img', 'aria-hidden': false }
 
   constructor() {
     super()
     this.attachShadow({ mode: 'open' })
-    IconWebComponent.renderer.render(this.shadowRoot, this._attributes)
   }
 
   render = debounce(
@@ -95,7 +92,7 @@ export class IconWebComponent extends HTMLElement {
     return JSON.parse(this.getAttribute('config'))
   }
 
-  set config(value: IconDefinition | string) {
+  set config(value: Record<string, any> | string) {
     const parsedValue = typeof value === 'string' ? JSON.parse(value) : value
     this._attributes.config = parsedValue
     this.setAttribute('config', JSON.stringify(parsedValue))
