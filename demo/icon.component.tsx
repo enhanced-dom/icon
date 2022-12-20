@@ -15,7 +15,6 @@ declare interface IconAttributes
   config: IconConfigType
 }
 
-IconWebComponent.register()
 export const Icon = withReactAdapter<IconWebComponent, never[], typeof IconWebComponent, IconAttributes>({
   type: IconWebComponent,
 })

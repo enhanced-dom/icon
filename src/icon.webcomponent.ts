@@ -1,5 +1,6 @@
 import debounce from 'lodash.debounce'
-import { HtmlRenderer, IAbstractElement } from '@enhanced-dom/webcomponent'
+import { WebcomponentRenderer, IRenderingEngine } from '@enhanced-dom/webcomponent'
+import type { IAbstractElement } from '@enhanced-dom/dom'
 import omit from 'lodash.omit'
 
 export interface IIconInterpreter<
@@ -18,34 +19,9 @@ export type IIconConfig<IconImplementationType = any> = IconImplementationType &
   namespace: string
 }
 
-export class MultiIconRenderer {
-  private static _iconInterpreters: Record<string, IIconInterpreter> = {}
-  private static _styles: Record<string, string>
-  static addInterpreter = (key: string, interpreter: IIconInterpreter) => {
-    MultiIconRenderer._iconInterpreters[key] = interpreter
-  }
-
-  render = <T extends IIconConfig<any>>(node: ShadowRoot, { config, ...rest }: { config: T } & any) => {
-    if (!config) {
-      return
-    }
-
-    if (!config.namespace) {
-      throw `no namespace found on the icon config: ${JSON.stringify(config)}`
-    }
-
-    const interpreter = MultiIconRenderer._iconInterpreters[config.namespace]
-    if (!interpreter) {
-      throw `no icon renderer found for namespace: ${config.namespace}`
-    }
-
-    const renderer = new HtmlRenderer('@enhanced-dom/MultiIconRenderer', interpreter.getIcon)
-    renderer.render(node, { config: omit(config, 'namespace'), ...rest })
-  }
-
-  addStyle = (name: string, style: string) => {
-    MultiIconRenderer._styles[name] = style
-  }
+const iconInterpreters: Record<string, IIconInterpreter> = {}
+const addInterpreter = (key: string, interpreter: IIconInterpreter) => {
+  iconInterpreters[key] = interpreter
 }
 
 export interface IconWebComponentAttributes {
@@ -64,9 +40,25 @@ export class IconWebComponent extends HTMLElement {
     }
   }
 
-  static renderer = new MultiIconRenderer()
+  static template = <T extends IIconConfig<any>>({ config, ...rest }: { config: T } & any) => {
+    if (!config) {
+      return
+    }
+
+    if (!config.namespace) {
+      throw `no namespace found on the icon config: ${JSON.stringify(config)}`
+    }
+
+    const interpreter = iconInterpreters[config.namespace]
+    if (!interpreter) {
+      throw `no icon renderer found for namespace: ${config.namespace}`
+    }
+
+    return interpreter.getIcon({ config: omit(config, 'namespace'), ...rest })
+  }
+  static renderer: IRenderingEngine = new WebcomponentRenderer('@enhanced-dom/IconWebComponent', IconWebComponent.template)
   static addIconInterpreter = (key: string, interpreter: IIconInterpreter) => {
-    MultiIconRenderer.addInterpreter(key, interpreter)
+    addInterpreter(key, interpreter)
   }
   // eslint-disable-next-line @typescript-eslint/naming-convention
   private _attributes: Record<string, any> = { role: 'img', 'aria-hidden': false }

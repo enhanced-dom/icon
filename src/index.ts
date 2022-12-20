@@ -1,2 +1,2 @@
-export type { IIconConfig, IIconInterpreter, MultiIconRenderer, IconWebComponentAttributes } from './icon.webcomponent'
+export type { IIconConfig, IIconInterpreter, IconWebComponentAttributes } from './icon.webcomponent'
 export { IconWebComponent } from './icon.webcomponent'
