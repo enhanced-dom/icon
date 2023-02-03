@@ -1,6 +1,6 @@
 {
   "name": "@enhanced-dom/icon",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Pluggable icon webcomponent",
   "keywords": [],
   "repository": "https://github.com/enhanced-dom/icon.git",
@@ -19,7 +19,7 @@
     "docs": "webpack build --config ./demo/webpack.config.js --mode=production"
   },
   "dependencies": {
-    "@enhanced-dom/webcomponent": "^0.0.10",
+    "@enhanced-dom/webcomponent": "^0.0.11",
     "classnames": "^2.3.1",
     "lodash.debounce": "^4.0.8",
     "lodash.omit": "^4.0.1"
@@ -28,13 +28,13 @@
     "@enhanced-dom/babel": "^0.0.5",
     "@enhanced-dom/fontawesome": "^0.0.5",
     "@enhanced-dom/lint": "^0.0.7",
-    "@enhanced-dom/react": "^0.0.13",
-    "@enhanced-dom/webpack": "^0.0.8",
+    "@enhanced-dom/react": "^0.0.14",
+    "@enhanced-dom/webpack": "^0.0.10",
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.omit": "^4.5.6",
     "@types/react": "^17.0.8",
     "@types/react-dom": "^17.0.5",
-    "typescript": "^4.2.2"
+    "typescript": "^4.9.5"
   },
   "engines": {
     "node": ">=14.17.0",
