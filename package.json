@@ -1,6 +1,6 @@
 {
   "name": "@enhanced-dom/icon",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Pluggable icon webcomponent",
   "keywords": [],
   "repository": "https://github.com/enhanced-dom/icon.git",
@@ -13,7 +13,6 @@
     "postbuild": "copyfiles LICENSE.md README.md dist && @enhanced-dom-copy-packagejson",
     "package": "cd dist && npm pack",
     "postinstall": "@enhanced-dom-husky",
-    "css": "webpack --config typed-styles.config.js",
     "lint": "eslint --fix --config eslint.config.js --ext ts,tsx src",
     "demo": "webpack serve --config ./demo/webpack.config.js",
     "docs": "webpack build --config ./demo/webpack.config.js --mode=production"

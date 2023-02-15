@@ -7,7 +7,9 @@ import * as styles from './app.pcss'
 const App = () => {
   return (
     <div className={styles.container}>
-      <Icon config={{ ...faArrowAltCircleUp, namespace: 'fa5' }} />
+      <div className={styles.wrapper}>
+        <Icon config={{ ...faArrowAltCircleUp, namespace: 'fa5' }} />
+      </div>
     </div>
   )
 }
