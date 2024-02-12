@@ -1,5 +1,5 @@
-import type { IAbstractElement } from '@enhanced-dom/dom'
-import { WebcomponentRenderer, IRenderingEngine } from '@enhanced-dom/webcomponent'
+import { type IAbstractElement } from '@enhanced-dom/dom'
+import { WebcomponentRenderer, type IRenderingEngine } from '@enhanced-dom/webcomponent'
 import debounce from 'lodash.debounce'
 import omit from 'lodash.omit'
 
