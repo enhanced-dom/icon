@@ -1,4 +1,4 @@
-import { type IAbstractElement } from '@enhanced-dom/dom'
+import { type IAbstractNode } from '@enhanced-dom/dom'
 import { WebcomponentRenderer, type IRenderingEngine } from '@enhanced-dom/webcomponent'
 import debounce from 'lodash.debounce'
 import omit from 'lodash.omit'
@@ -15,7 +15,7 @@ export interface IIconInterpreter<
     delegated?: Record<string, string>
   },
 > {
-  getIcon: (props: IconPropsType) => IAbstractElement
+  getIcon: (props: IconPropsType) => IAbstractNode | IAbstractNode[]
 }
 
 export type IIconConfig<IconImplementationType = any> = IconImplementationType & {
